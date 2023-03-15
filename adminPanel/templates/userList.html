@@ -1,0 +1,200 @@
+
+{% include 'adminBase.html' %}
+{% load static %}
+{% block content %}
+<section class="col-lg-9 pt-lg-4 pb-4 mb-3">
+    <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+        
+      <h2 class=" py-2 align-items-center text-center text-sm-start mx-5 px-5">User MANAGEMENT</h2>
+        <form action="{% url 'user_search' %}">
+      <div class="input-group mx-5 px-5">
+        <input name = "keyword" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button class="btn btn-outline-primary" type ="submit" >search</button>
+      </div>
+    </form>
+      <!-- Tabs-->
+        {% comment %} <ul class="nav nav-tabs nav-justified" role="tablist">
+        
+             <li class="nav-item"><a class="nav-link px-0"  data-bs-toggle="tab" role="tab">
+              {% if 'user-search' in request.path %}
+              <div class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>Search Results</div>
+              {% else %}
+               <div class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>All Users</div>
+               {% endif %}
+               
+        </ul>
+         {% endcomment %}
+         <ul class="nav nav-tabs nav-justified" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link px-0" data-bs-toggle="tab" role="tab">
+      {% if 'user-search' in request.path %}
+        <div class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>Search Results</div>
+      {% else %}
+        <div class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>All Users</div>
+        <div class="ml-auto d-flex align-items-center">
+          <a href="{% url 'user_create' %}" class="btn btn-primary">Add User</a>
+        </div>
+      {% endif %}
+    </a>
+  </li>
+</ul>
+
+      <!-- Tab content-->
+      <div class="tab-content">
+         {% comment %} {% for category in categories %} {% endcomment %}
+         <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>
+                          User
+                        </th>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Email
+                        </th>
+                        <th>
+                          Phone
+                        </th>
+                        <th>
+                          Status
+                        </th>
+                        <th>
+                          Edit
+                        </th>
+                        <th>
+                          Disable
+                        </th>
+                      </tr>
+                    </thead>
+                    {% for user in users %}
+                    <tbody>
+                      <tr>
+                        <td class="py-1">
+                         
+                         {{user.id}}
+                        </td>
+                        <td>
+                          {{user.first_name}}
+                        </td>
+                        <td>
+                          {{user.email}}
+                        </td>
+                        <td>
+                            {{user.phone_number}}
+                        </td>
+                        <td>
+                          {{user.is_active}}
+                      </td>
+                        <td class="row">
+                            <div class="d-flex align-items-center justify-content-evenly p-0 m-0">
+                              
+                              <a href=" {% url 'edit_user' user.id %}" class="btn bg-faded-info btn-icon me-2" type="button" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit text-info"></i></a>
+                            {% comment %} <a href="{% url 'delete_user' user.id %}" class="btn bg-faded-danger btn-icon" type="button" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash text-danger"></i></a> {% endcomment %}
+                            
+                            <div>
+                            
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center justify-content-evenly  p-0 m-0">
+                            {% if not user.is_active is False %} 
+                            
+                            <a href=" {% url 'delete_user' user.id %}">
+                            <i class ="fa fa-times"></i>
+                            </a>
+                            {% else %}
+                            <a href=" {% url 'delete_user' user.id %}">
+                              <i class ="fa fa-check"></i>
+                             </a>
+                            {% endif %}
+                          </td>
+
+                           
+                    </tbody>
+                    {% endfor %} 
+
+
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} {% endfor %} {% endcomment %}
+          
+          
+          <!-- Product-->
+<!-- Modal to display the user details -->
+
+        <!-- Notifications-->
+        
+        <!-- Payment methods-->
+        
+      </div>
+
+
+
+    </div>
+
+<nav class="m-4" aria-label="Page navigation sample">
+	
+    {% if is_paginated %}
+    <nav class="pagination">
+        <ul class="pagination-list">
+            {% if page_obj.has_previous %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.previous_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Previous</a>
+                </li>
+            {% endif %}
+            {% for page in page_obj.paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <li class="pagination-item is-active">
+                        <a href="#" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %}
+                    <li class="pagination-item">
+                        <a href="?page={{ page }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.next_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+</nav>
+  </section>
+
+  <script>
+    $(document).ready(function() {
+        $(".form-check-input").on("change", function() {
+            var isChecked = $(this).prop("checked");
+            var userId = $(this).data("user-id");
+            var url = $(this).data("url");
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    "is_active": isChecked,
+                    "user_id": userId,
+                    "csrfmiddlewaretoken": "{{ csrf_token }}"
+                },
+                success: function(data) {
+                    var label = $("#is_active_" + userId).next("label");
+                    label.text(isChecked ? "Active" : "Inactive");
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock content %}

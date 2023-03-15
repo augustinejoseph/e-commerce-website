@@ -1,0 +1,40 @@
+<article>
+		<form method="GET" action="{% url 'home' %}">
+			<label for="brand">Brand:</label>
+			<select name="brand" id="brand">
+			  <option value="">--Select brand--</option>
+			  {% for brand in brands %}
+				<option value="{{ brand }}">{{ brand }}</option>
+			  {% endfor %}
+			</select>
+		  
+			<div class="form-row">
+			<div class="form-group col-md-6">
+			<label for="min_price">Min price:</label>
+			<select name="min_price" id="min_price">
+			  <option value="">--Select min price--</option>
+			  <option value="0">0</option>
+			  <option value="1000">1000</option>
+			  <option value="2000">2000</option>
+			  <option value="5000">5000</option>
+			  <option value="10000">10000</option>
+			  <!-- Add more options as needed -->
+			</select>
+		</div>
+		<div class="form-group text-right col-md-6">
+		  
+			<label for="max_price">Max price:</label>
+			<select name="max_price" id="max_price">
+			  <option value="">--Select max price--</option>
+			  <option value="1000">1000</option>
+			  <option value="2000">2000</option>
+			  <option value="5000">5000</option>
+			  <option value="10000">10000</option>
+			  <option value="100000">Above 10000</option>
+			  <!-- Add more options as needed -->
+			</select>
+			</div>
+			</div>
+			<button class="btn btn-block btn-primary" type="submit">Filter</button>
+		  </form>
+	</article>

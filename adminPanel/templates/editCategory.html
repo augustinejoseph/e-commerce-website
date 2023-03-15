@@ -1,0 +1,50 @@
+{% extends 'adminBase.html' %}
+{% block content %}
+<div class="col-lg-9 grid-margin stretch-card p-2">
+    <form action="" method="POST" >
+        {% csrf_token %}
+    <div class="card">
+      <div class="card-body">
+
+        {{form.as_p}}
+        <button  type="submit" class ="btn btn-primary btn-sm">Update</button>
+      </div>
+    </div>
+    </form>
+    </div> 
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        {% comment %} $(document).ready(function() {
+            // Get the categoryName and slug input fields
+            var categoryNameInput = $('#id_categoryName');
+            var slugInput = $('#id_slug');
+
+            // When the categoryName field changes
+            categoryNameInput.change(function() {
+                // Get the value of the categoryName field
+                var categoryName = categoryNameInput.val();
+
+                // Remove any characters that are not letters, numbers, or spaces
+                var slug = categoryName.replace(/[^a-zA-Z0-9 ]/g, '');
+
+                // Replace spaces with hyphens
+                slug = slug.replace(/\s+/g, '-');
+
+                // Convert the slug to lowercase
+                slug = slug.toLowerCase();
+
+                // Set the value of the slug field
+                slugInput.val(slug);
+            });
+        }); {% endcomment %}
+
+        $(document).ready(function() {
+            $('#id_categoryName').on('input', function() {
+                var categoryName = $(this).val();
+                var slug = categoryName.replace(/\s+/g, '-').toLowerCase();
+                $('#id_slug').val(slug);
+            });
+        });
+    </script>
+{% endblock content %}

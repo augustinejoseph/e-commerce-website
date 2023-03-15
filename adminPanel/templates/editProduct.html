@@ -1,0 +1,124 @@
+{% extends 'adminBase.html' %}
+{% load crispy_forms_tags%}
+{% load static %}
+{% block content %}
+
+<div class="col-lg-9 grid-margin stretch-card p-2 form-input">
+    <div class="card">
+      <div class="card-body ">
+        <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-label">
+        {{form | crispy }}
+        </div>
+        <button class="btn btn-small btn-primary" type="submit">Save</button>
+    </form>
+    </div>
+    </div>
+    </div> 
+    
+<script>
+    $(document).ready(function() {
+      $('#id_productName').on('input', function() {
+          var productName = $(this).val();
+          var slug = productName.replace(/\s+/g, '-').toLowerCase();
+          $('#id_slug').val(slug);
+      });
+  });
+</script>
+{% endblock content %}
+
+{% comment %} {% include 'adminBase.html' %}
+{% load static %}
+{% block content %} {% endcomment %}
+{% comment %} <div class="col-lg-9 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+
+   <form action="{% url 'edit_product' product.id %}"  enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Save changes</button>
+  </form> 
+</div>
+</div>
+</div> {% endcomment %}
+
+
+{% comment %} 
+{% include 'adminBase.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-9 grid-margin stretch-card p-2">
+  <div class="card">
+    <div class="card-body">
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="{{ form.productName.id_for_label }}" class="col-sm-3 col-form-label">Product Name</label>
+          <div class="col-sm-9 form-inline">
+            {{ form.productName }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.brand.id_for_label }}" class="col-sm-3 col-form-label">Brand</label>
+          <div class="col-sm-9">
+            {{ form.brand }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.productDescription.id_for_label }}" class="col-sm-3 col-form-label">Product Description</label>
+          <div class="col-sm-9">
+            {{ form.productDescription }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.slug.id_for_label }}" class="col-sm-3 col-form-label">Slug</label>
+          <div class="col-sm-9">
+            {{ form.slug }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.images.id_for_label }}" class="col-sm-3 col-form-label">Images</label>
+          <div class="col-sm-9">
+            {{ form.images }}
+            {% if form.images.value %}
+            <img src="{{ form.images.value.url }}" alt="image preview" style="max-height: 200px;">
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.price.id_for_label }}" class="col-sm-3 col-form-label">Price</label>
+          <div class="col-sm-9">
+            {{ form.price }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.isAvailable.id_for_label }}" class="col-sm-3 col-form-label">Availability</label>
+          <div class="col-sm-9">
+            {{ form.isAvailable }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.stock.id_for_label }}" class="col-sm-3 col-form-label">Stock</label>
+          <div class="col-sm-9">
+            {{ form.stock }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.category.id_for_label }}" class="col-sm-3 col-form-label">Category</label>
+          <div class="col-sm-9">
+            {{ form.category }}
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button class="btn btn-light">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div> 
+
+{% endblock content %} {% endcomment %}
+

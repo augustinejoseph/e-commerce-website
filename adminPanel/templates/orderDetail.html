@@ -1,0 +1,103 @@
+{% extends 'adminBase.html' %}
+{% block content %}
+
+<div class="col-lg-9 grid-margin stretch-card p-2 form-input">
+    <div class="card">
+      <div class="card-body ">
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">Order NUmber</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> {{order.orderNumber}}</p>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.firstName}}</p>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.email}}</p>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">Mobile</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.}}</p>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.addressLineOne}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2 pt-2">
+                  <p class="mb-0">Status</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.status}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">Ordered</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.isOrdered}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">city</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.city}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">state</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.state}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <p class="mb-0">orderNote</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{order.orderNote}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-2">
+                  <a href="{% url 'order_list' %}" class=" btn btn-primary mb-0">Back</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+    </div> 
+
+{% endblock content %}

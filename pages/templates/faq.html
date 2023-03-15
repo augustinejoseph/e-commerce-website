@@ -1,0 +1,74 @@
+{% extends 'homebase_ecommerce.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="faq_area section_padding_130" id="faq">
+    <div class="container">
+        <div class="row justify-content-center m-3">
+            <div class="col-12 col-sm-8 col-lg-6">
+                <!-- Section Heading-->
+                <div class="section_heading text-center wow fadeInUp mb-3" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <h3><span>Frequently </span> Asked Questions</h3>
+                    <p class = "m-3">We offer a 1-year warranty on all of our shoes. If you experience any defects or issues with your shoes within that time frame, please contact our customer service team for assistance.</p>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <!-- FAQ Area-->
+            <div class="col-12 col-sm-10 col-lg-8">
+                <div class="accordion faq-accordian" id="faqAccordion">
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingOne">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What is your return policy?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Our return policy allows you to return any unworn shoes within 30 days of purchase for a full refund. We also offer free return shipping.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingTwo">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">How do I determine my shoe size?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>You can use our online size chart to determine your shoe size. Simply measure your feet and match them to the corresponding size on our chart.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingThree">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Do you offer free shipping?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Yes, we offer free shipping on all orders over Rs. 1000.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingThree">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">How long will it take to receive my order?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Delivery times vary depending on your location and the shipping method you choose. Generally, you can expect to receive your order within 5-7 business days.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Support Button-->
+                <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                    <i class="lni-emoji-sad"></i>
+                    <p class="mb-0 px-2">Can't find your answers?</p>
+                    <a href="{% url 'contact' %}"> Contact us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

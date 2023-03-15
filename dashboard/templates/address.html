@@ -1,0 +1,58 @@
+{% extends 'homebase_ecommerce.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-conten padding-y bg">
+
+    {% include 'alerts.html' %}
+
+    <div class="container">
+        <div class="row">
+            {% include 'include/dashboardSidebar.html' %}
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">{{user.first_name}}'s Address</strong>
+            </header>
+            <div class="card-body">
+                <div class="text-right">
+                    <img src="{{ profile_form.profile_picture.url }}" alt="Profile Picture" width="100" style="border-radius:50px;">
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                    <form action="{% url 'edit' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-control form-group">
+                            <label>Address Line 1 : </label>
+                            <strong>{{profile_form.address_line_one}}</strong>
+                        </div>
+                        <div class="form-group form-control">
+                            <label>Address Line 2 : </label>
+                            <strong>{{profile_form.address_line_two}}</strong>
+                        </div>
+                        <div class="form-row form-group ">
+                            <div class=" form-control col-md-4">
+                                <label>City : </label>
+                                <strong>{{profile_form.city}}</strong>
+                            </div>
+                            <div class=" form-control col-md-4">
+                                <label>State : </label>
+                                <strong>{{profile_form.state}}</strong>
+                            </div>
+                            <div class=" form-control col-md-4">
+                                <label>Country : </label>
+                                <strong>{{profile_form.country}}</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+{% endblock content %}

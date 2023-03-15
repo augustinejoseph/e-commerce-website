@@ -1,0 +1,173 @@
+{% extends 'homebase_ecommerce.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+<div class="container">
+	{% if 'search' in request.path %}
+		<h5 class="title-page text-center p-2">Search Results</h5>
+	{% else %}
+		
+	{% endif %}
+
+</div> <!-- container //  -->
+
+</section>
+
+
+<section class="section-content padding-y">
+    
+<div class="container">
+
+<div class="row">
+	{% if  'search' in request.path %}
+    {% if not user.is_authenticated%}
+    {% include 'banner.html' %}
+    {% endif %}
+    {% endif %}
+
+	<aside class="col-md-3">
+
+<div class="card mt-5 mr-3">
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa "></i>
+				<h5 class="title text-center"><strong> Categories </strong></h5>
+                <li  class="list-group-item text-black"><a href="{% url 'home' %}">All Categories</a></li>
+				{% for category in link %}
+                <li  class="list-group-item text-black"><a href="{{category.menuUrl}}">{{ category.categoryName }} </a></li>
+                {% endfor %}
+
+			</a>
+		</header>
+		
+	</article> <!-- filter-group  .// -->
+
+
+	
+
+
+	<article class="filter-group">
+    <header class="card-header">
+        <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+            <i class="icon-control fa "></i>
+            <h5 class="title"><strong> Price range </strong></h5>
+        </a>
+    </header>
+    <div class="filter-content collapse show" id="collapse_3" style="">
+        <div class="card-body">
+            <form method="GET" action="{% url 'home' %}">
+
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="min_price">Min price:</label>
+            <select name="min_price" id="min_price" class="mr-2 form-control">
+          <option value="">--Select min price--</option>
+          <option value="0">Rs. 0</option>
+          <option value="1000">Rs. 1000</option>
+          <option value="2000">Rs. 2000</option>
+          <option value="5000">Rs. 5000</option>
+          <option value="10000">Rs. 10000</option>
+          <!-- Add more options as needed -->
+        </select>
+            </div>
+            <div class="form-group text-right col-md-6">
+            <label for="max_price">Max price:</label>
+          <select name="max_price" id="max_price" class="mr-2 form-control"> 
+          <option value="">--Select max price--</option>
+          <option value="1000">Rs. 1000</option>
+          <option value="2000">Rs. 2000</option>
+          <option value="5000">Rs. 5000</option>
+          <option value="10000">Rs. 10000</option>
+          <option value="100000">Above 10000</option>
+          <!-- Add more options as needed -->
+        </select>
+            </div>
+            </div> <!-- form-row.// -->
+            <button class="btn btn-block btn-primary" type="submit">Filter</button>
+        </div><!-- card-body.// -->
+    </div>
+</article> <!-- filter-group .// -->
+
+</div> 
+
+	</aside> <!-- col.// -->
+	<main class="col-md-9">
+
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-6 col-12">
+        <!-- Start Single Product -->
+        <div class="single-product">
+            <div class="product-image">
+                <a href="{{ product.productUrl }}">
+				{% comment %} <a href="{{ product.productUrl }}"> {% endcomment %}
+                <img  style="width : 210px; height: 90px" src="{{product.images.url}}" alt="#">
+				</a>
+
+            </div>
+            <div class="product-info">
+                <span class="category">{{product.category}}</span>
+                <ul class="review">
+                    <li><span>Brand : {{product.brand}}</span></li>
+                </ul>
+                <h4 class="title">
+                    <a href="{{ product.productUrl }}">{{product.productName |truncatechars:20}}</a>
+                </h4>
+                
+                <div class="price">
+                    <span>₹ {{product.price}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Product -->
+    </div>
+    {% endfor %}
+    
+</div>
+
+
+<nav class="m-4" aria-label="Page navigation sample">
+	
+    {% if is_paginated %}
+    <nav class="pagination">
+        <ul class="pagination-list">
+            {% if page_obj.has_previous %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.previous_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Previous</a>
+                </li>
+            {% endif %}
+            {% for page in page_obj.paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <li class="pagination-item is-active">
+                        <a href="#" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %}
+                    <li class="pagination-item">
+                        <a href="?page={{ page }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.next_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+</nav>
+
+	</main> <!-- col.// -->
+
+</div>
+
+</div> <!-- container .//  -->
+</section>
+{% endblock %}

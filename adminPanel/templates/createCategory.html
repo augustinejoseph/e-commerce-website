@@ -1,0 +1,29 @@
+{% extends 'adminBase.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-lg-9 grid-margin stretch-card p-1">
+    <div class="card  ml-2">
+      
+<form action="" method="POST">
+{% csrf_token %}
+<div class="form-control form-row">
+{{form | crispy}}
+<button type="submit" class="btn btn-sm btn-primary">Save</button>
+</div>
+
+</form>
+</div>
+</div>
+</div> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#id_categoryName').on('input', function() {
+        var categoryName = $(this).val();
+        var slug = categoryName.replace(/\s+/g, '-').toLowerCase();
+        $('#id_slug').val(slug);
+    });
+});
+</script>
+{% endblock content %}

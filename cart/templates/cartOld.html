@@ -1,0 +1,107 @@
+<div class="container-fluid pt-5">
+
+    
+    <div class="text-center m-5 pt-5">
+        <h2>Your Shopping cart is empty</h2>
+    </div>
+    <div class="text-center">  
+        <a class="btn btn-primary m-5" href="{% url 'home' %}">Continue Shopping</a>
+    </div>
+    {% else %}
+    <div>
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-primary text-dark">
+                    <tr>
+                        <th>Products</th>
+                        <th>Variation</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Item Total</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for cartItem in cartItems %}
+                    <tr>
+                        <td class="align-middle p-0 m-0"><img src="{{ cartItem.product.images.url }}" alt="" style="width: 50px;"> {{ cartItem.product.productName |truncatechars:15 }}</td>
+                        <td class="align-middle p-0">
+                            <div>
+                                <p class="text-muted small">
+                                    {% if cartItem.variations.all %}
+                                        {% for item in cartItem.variations.all %}
+                                            {{ item.variationCategory | capfirst }} : {{ item.variationValue | capfirst }} <br>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div>
+                                {{cartItem.variations.variationValue}}
+                           </div>
+                         </td>
+                        <td class="align-middle">Rs. {{ cartItem.product.price }}</td>
+                        
+                        <td class="align-middle">
+                            <div class="input-group quantity mx-auto" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary btn-minus" >
+                                        <a href="{% url 'removeCart' cartItem.product.id cartItem.id %}" class="fa fa-minus text-white"></a>
+                                    </button>
+                                </div> 
+                                <input type="text" class="form-control form-control-sm bg-white text-center" value="{{ cartItem.quantity }}">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary btn-plus">
+                                        <a href="{% url 'addCart' cartItem.product.id  %}" class="fa fa-plus text-white"></a>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">Rs.{{ cartItem.subTotal}}</td>
+                        <td<a href="{% url 'addCart' cartItem.product.id  %}" class="fa fa-plus text-white"></a>
+                        <td >  <a class=" btn btn-danger "href="{% url 'removeCartItem' cartItem.product.id  cartItem.id %}" > Remove</a> </td>
+                        
+                        
+                        {% comment %} <p class="text-muted small">
+                            {% if cartItem.variations.all %}
+                                {% for item in cartItem.variation.all %}
+                                    {{ item.variationCategory | capfirst }} : {{ item.variationValue | capfirst }} <br>
+                                {% endfor %}
+                            {% endif %}
+                        </p> {% endcomment %}
+                                            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <td class="align-middle">{{ cartItem.variations }}</td>
+            <div class="card border-secondary my-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h5 class="font-weight-medium">Subtotal</h5>
+                        <h5 class="font-weight-medium"><strong> Rs. {{ total |floatformat:2 }} </strong></h5>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="font-weight-medium">Tax @ 18%</h5>
+                        <h6 class="font-weight-medium">{{tax |floatformat:2 }}</h6>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Total</h5>
+                        <h5 class="font-weight-bold">{{grandTotal|floatformat:2 }}</h5>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endif %}

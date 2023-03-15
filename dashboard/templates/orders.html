@@ -1,0 +1,64 @@
+{% extends 'homebase_ecommerce.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-conten padding-y bg my-5">
+  
+    <div class="container">
+        <div class="row">
+            {% include 'include/dashboardSidebar.html' %}
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Manage {{user.first_name}}'s Orders : </strong>
+                
+            </header>
+
+
+            <table class="table table-hover p-1 text-small">
+                <thead>
+                  <tr>
+                    <th scope="col">Order No.</th>
+                    <th scope="col">Billing Name</th>
+                    <th scope="col">Phone </th>
+                    <th scope="col"> Total</th>
+                    <th scope="col"> Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Return</th>
+
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                  <tr>
+                    <th scope="row">{{ order.orderNumber }}</th>
+                    <td>{{ order.firstName }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>Rs {{ order.orderTotal }}</td>
+                    <td>{{ order.dateCreated|truncatechars:10 }} </td>
+                    <td>{{ order.status }}</td>
+                    {% if order.status == "Delivered" %}
+                    <td ><a href="{% url 'returnProduct' order.id%}" class="btn btn-secondary text-small">Return</a></td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+
+
+{% endblock content %}
+
+
+
+

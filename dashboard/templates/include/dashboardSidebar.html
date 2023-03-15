@@ -1,0 +1,27 @@
+{% comment %} <aside class="col-md-3">
+    <!--   SIDEBAR   -->
+    <ul class="list-group">
+      <a class="list-group-item {% if '/accounts/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}"> Dashboard </a>
+      <a class="list-group-item {% if '/my_orders/' in request.path %}active{% endif %}" href="{% url 'my_orders' %}"> My Orders </a>
+      <a class="list-group-item {% if '/edit_profile/' in request.path %}active{% endif %}" href="{% url 'edit_profile' %}"> Edit Profile </a>
+      <a class="list-group-item {% if '/change_password/' in request.path %}active{% endif %}" href="{% url 'change_password' %}"> Change Password </a>
+    </ul>
+    <br>
+    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a>
+    <!--   SIDEBAR .//END   -->
+  </aside> {% endcomment %}
+  
+  	<aside class="col-md-3" >
+		<!--   SIDEBAR   -->
+		<ul class="list-group" > 
+			<a class="list-group-item {% if '/dashboard/view/' in request.path%} active {% endif %}" style = "color:black" href="{% url 'dashboard' %}"> <strong>Dashboard</strong> </a>
+			<a class="list-group-item {% if '/dashboard/edit/' in request.path%}active{% endif %}" style = "color:black" href="{% url 'edit' %}"><strong>Edit Details</strong></a>			
+			<a class="list-group-item {% if '/dashboard/orders/' in request.path %}active{% endif %}" style = "color:black" href="{% url 'orders' %}"> <strong> My Orders</strong></a>
+			<a class="list-group-item {% if '/dashboard/change_password/' in request.path %}active{% endif %}" style = "color:black" href="{% url 'changePassword' %}"> <strong>Change Password</strong></a>
+			<a class="list-group-item {% if '/dashboard/address/' in request.path%} active {% endif %}" style = "color:black" href="{% url 'address' %}" > <strong>Address</strong></a>
+
+		</ul>
+		<br>
+		<a class="btn btn-danger btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off "></i> <span class="text">Log out</span> </a>
+		<!--   SIDEBAR .//END   -->
+	</aside>

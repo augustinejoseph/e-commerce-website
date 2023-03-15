@@ -1,0 +1,50 @@
+{% comment %} <form action="{% url 'adminLogin' %}" method='POST'>
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" name ='email'>
+    <label for="password">Password</label>
+    <input type="text" name ='password'>
+    <button type='submit'> Login </button>
+</form>
+ {% endcomment %}
+
+
+
+
+{% load static %}
+{% include 'adminLinks.html' %}
+<div class="container mt-5">
+  {% include 'alerts.html' %} 
+    <section class="vh-100" style="">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <form action="{% url 'adminLogin' %}" method="POST">
+                    {% csrf_token %}
+                <div class="card-body p-5 text-center">
+      
+                  <h3 class="mb-2">Sign in</h3>
+                  <h3 class="mb-5">Admin Panel</h3>
+      
+                  <div class="form-outline mb-4">
+                    <input type="email" name = "email" id="typeEmailX-2" class="form-control form-control-lg" />
+                    <label class="form-label"  >Email</label>
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                    <input type="password"  name = "password" id="typePasswordX-2" class="form-control form-control-lg" />
+                    <label class="form-label" >Password</label>
+                  </div>
+      
+                  <!-- Checkbox -->
+                 
+      
+                  <button class="btn btn-primary btn-md btn-block" type="submit">Login</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>

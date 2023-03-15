@@ -1,0 +1,71 @@
+{% extends 'homebase_ecommerce.html' %}
+{% load static %}
+{% block content %}
+
+
+
+ {% if not wishlist %}
+ <div class="container-fluid pt-5">
+
+    
+    <div class="text-center m-5 pt-5">
+        <h2>Your WishList is empty</h2>
+    </div>
+    <div class="text-center">  
+        <a class="btn btn-primary m-5" href="{% url 'home' %}">Continue Shopping add some products to your WishList</a>
+    </div>
+    {% else %}
+    <div  >
+    <div class="row align-center">
+        <div class=" align-center col-lg-10 table-responsive px-5">
+            <table class="table table-bordered text-center align-center">
+                <thead class="bg-primary text-dark">
+                    <tr>
+                        <th>Products</th>
+                        <th>Variation</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
+
+                    </tr>
+                </thead>
+                <tbody class="align-left">
+                    {% for item in wishlist %}
+                    <tr>
+                        <td class="align-middle p-0 m-0"><img src="{{ item.wished_item.images.url }}" alt="" style="width: 50px;"> {{ item.wished_item|truncatechars:25 }}</td>
+                        <td class="align-middle text-center p-0">
+                            <div>
+                                 {{item.wished_item.category}}
+                            </div>
+                            <div>
+                                {{item.variations.variationValue}}
+                           </div>
+                         </td>
+                        <td class="text-center">Rs. {{ item.wished_item.price }}</td>
+                        <td class="display-flex align-center">
+                            <form action="{% url 'removeWishlist' item.wished_item.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" type="submit">Remove</button>
+                            </form>
+                        </td>
+                        {% comment %} <td class="display-flex align-center">
+                            <form action="{% url 'addcart' cartItem.product.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" type="submit">Move to Cart</button>
+                            </form>
+                        </td> {% endcomment %}
+                                            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">  
+            <a class="btn btn-primary m-5" href="{% url 'home' %}">Continue Shopping add some products to your WishList</a>
+        </div>
+    </div>
+
+{% endif %}
+
+
+{% endblock content %}

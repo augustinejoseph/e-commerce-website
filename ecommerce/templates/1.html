@@ -1,0 +1,41 @@
+<article class="filter-group">
+    <header class="card-header">
+        <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+            <i class="icon-control fa fa-chevron-down"></i>
+            <h6 class="title">Price range </h6>
+        </a>
+    </header>
+    <div class="filter-content collapse show" id="collapse_3" style="">
+        <div class="card-body">
+            <form method="GET" action="{% url 'home' %}">
+
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="min_price">Min price:</label>
+            <select name="min_price" id="min_price">
+          <option value="">--Select min price--</option>
+          <option value="0">0</option>
+          <option value="1000">1000</option>
+          <option value="2000">2000</option>
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+          <!-- Add more options as needed -->
+        </select>
+            </div>
+            <div class="form-group text-right col-md-6">
+            <label for="max_price">Max price:</label>
+          <select name="max_price" id="max_price">
+          <option value="">--Select max price--</option>
+          <option value="1000">1000</option>
+          <option value="2000">2000</option>
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+          <option value="100000">Above 10000</option>
+          <!-- Add more options as needed -->
+        </select>
+            </div>
+            </div> <!-- form-row.// -->
+            <button class="btn btn-block btn-primary" type="submit">Filter</button>
+        </div><!-- card-body.// -->
+    </div>
+</article> <!-- filter-group .// -->

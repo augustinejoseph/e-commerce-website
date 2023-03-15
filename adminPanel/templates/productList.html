@@ -1,0 +1,108 @@
+
+{% include 'adminBase.html' %}
+{% load static %}
+{% block content %}
+<section class="col-lg-9 pt-lg-4 pb-4 mb-3">
+    <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+        
+      <h2 class=" py-2 align-items-center text-center text-sm-start mx-5 px-5">PRODUCT MANAGEMENT</h2>
+        <form action="{% url 'product_search' %}">
+      <div class="input-group mx-5 px-5">
+        <input name = "keyword" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button class="btn btn-outline-primary" type ="submit" >search</button>
+      </div>
+    </form>
+      <!-- Tabs-->
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+        
+             <li class="nav-item"><a class="nav-link px-0"  data-bs-toggle="tab" role="tab">
+              {% if 'product-search' in request.path %}
+              <div class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>Search Results</div>
+              {% else %}
+               <i class="d-none d-lg-block"><i class="ci-card opacity-60 me-2"></i>All Products</i>
+                            
+               {% endif %}
+              <li class="btn btn-sm btn-primary"><a class="btn btn-sm btn-primary" href="{% url 'create_product' %}">Add Product</a></li>
+        </ul>
+      <!-- Tab content-->
+      <div class="tab-content">
+         {% for product in products %}
+         <div class="d-block d-sm-flex align-items-center py-4 border-bottom"><a class="d-block mb-3 mb-sm-0 me-sm-4 ms-sm-0 mx-auto"  style="width: 12.5rem;"><img  style="width : 210px; height: 90px" src="{{product.images.url}}" alt="#"></a>
+            <div class="text-center text-sm-start">
+              <h3 class="h6 product-title mb-2"><a href="marketplace-single.html">{{product.productName}}</a></h3>
+              <div class="d-inline-block text-accent">Rs. {{product.price}}.<small>00</small></div>
+              <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Stock: <span class="fw-medium">{{product.stock}}</span></div>
+              <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Available: <span class="fw-medium">{{product.isAvailable}}.<small></small></span></div>
+              <div class="d-flex justify-content-center justify-content-sm-start pt-3">
+                <h6 class="d-inline-block fs-ms border-start ms-2 ps-2" href="marketplace-single.html">{{product.productDescription |truncatechars:100}}</h6>
+                
+              </div>
+              <div>
+
+                <button class="btn bg-faded-accent btn-icon me-2" type="button" data-bs-toggle="tooltip" title="View"><i class="fa fa-eye text-accent"></i></button>
+                
+                <a href="{% url 'edit_product' product.id %}" class="btn bg-faded-info btn-icon me-2" type="button" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit text-info"></i></a>
+                <a href="{% url 'delete_product' product.id %}" class="btn bg-faded-danger btn-icon" type="button" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+          
+          <!-- Product-->
+        
+        <!-- Notifications-->
+        
+        <!-- Payment methods-->
+        
+      </div>
+
+
+
+    </div>
+
+<nav class="m-4" aria-label="Page navigation sample">
+	
+    {% if is_paginated %}
+    <nav class="pagination">
+        <ul class="pagination-list">
+            {% if page_obj.has_previous %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.previous_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Previous</a>
+                </li>
+            {% endif %}
+            {% for page in page_obj.paginator.page_range %}
+                {% if page_obj.number == page %}
+                    <li class="pagination-item is-active">
+                        <a href="#" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %}
+                    <li class="pagination-item">
+                        <a href="?page={{ page }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="pagination-item">
+                    <a href="?page={{ page_obj.next_page_number }}{% if brand %}&brand={{ brand }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" class="pagination-link">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+</nav>
+  </section>
+
+
+
+  {% comment %} script {% endcomment %}
+  <script>
+  const searchButton = document.getElementById('search-button');
+const searchInput = document.getElementById('search-input');
+searchButton.addEventListener('click', () => {
+  const inputValue = searchInput.value;
+  alert(inputValue);
+</script>
+});
+{% endblock content %}
