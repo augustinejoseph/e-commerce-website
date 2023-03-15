@@ -9,7 +9,7 @@ import datetime
 from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 from cart import utils
-
+#sample comment
 @login_required(login_url='login')
 def placeOrder(request):
     currentUser = request.user
