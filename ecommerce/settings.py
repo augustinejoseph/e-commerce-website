@@ -212,8 +212,13 @@ EMAIL_USE_TLS =True
 # MEDIA_URL = BASE_DIR/'media'
 
 # media files configuration
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media/'
+if DEBUG == True:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR/'media/'
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 
