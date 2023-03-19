@@ -21,7 +21,7 @@ def quantity(cartItems):
     for item in cartItems:
         total += (item.product.price * item.quantity)
         quantity += item.quantity
-        return quantity
+    return quantity
 
 def tax(total):
     return (.18*total)
