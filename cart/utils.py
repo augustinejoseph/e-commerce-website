@@ -13,7 +13,7 @@ def total(cartItems):
     for item in cartItems:
         total += (item.product.price * item.quantity)
         quantity += item.quantity
-        return total
+    return total
 
 def quantity(cartItems):
     quantity=0

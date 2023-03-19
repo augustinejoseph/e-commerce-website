@@ -133,14 +133,14 @@
 							<button id="rzp-button1" class=" payWithRazorpay btn btn-primary btn-block p-1 m-0">Pay With RazorPay Bottom</a> </button>
 						</div class="pt-5" >
 						<div class="pt-2">
-							<button type="button" class="razorpay-payment-button" rzp-button2>Cash on Delivery</button>
+							<a href="{% url 'cod' %}" type="button" class="  btn btn-primary btn-block p-1 m-0"rzp-button2>Cash on Delivery</a>
 
 							{% comment %} <button class="btn btn-primary btn-block p-1 m-0"><a href="{% url 'orderCompleted' %}"><h5 class="btn btn-primary btn-block p-1 m-0">Cash on Delivery</h5></a> </button> {% endcomment %}
 							
 						</div>
 					</form>
 					</div>
-					{{razorpayTotal}} <!-- card-body.// -->
+					<!-- card-body.// -->
 				</div> <!-- card.// -->
 			</aside> <!-- col.// -->
 

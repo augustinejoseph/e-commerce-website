@@ -28,7 +28,6 @@ from cart import utils
 from django.http import JsonResponse
 from accounts.models import Address
 now = timezone.make_aware(datetime.now(), timezone.get_default_timezone())
-razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
 def get_address(request, address_id):
     try:
@@ -194,7 +193,6 @@ def addCart(request, productId):
             cartItem.save()
         return redirect('cart')
 
-# final
 def removeCartItem(request, productId , cartItemId):
     product = get_object_or_404(Product, id=productId)
     if request.user.is_authenticated:
@@ -320,45 +318,5 @@ class CheckoutView(LoginRequiredMixin, View):
                 messages.error(request, 'Invalid Coupon. Try agian with another code')
         return redirect('checkout')
 
-@csrf_exempt
-def razorpay_success(request):
-    if request.method == 'POST':
-        razorpay_order_id = request.POST.get('razorpay_order_id')
-        razorpay_payment_id = request.POST.get('razorpay_payment_id')
-        razorpay_signature = request.POST.get('razorpay_signature')
-
-        try:
-            # Verify the payment signature
-            razorpay_client.utility.verify_payment_signature({
-                'razorpay_order_id': razorpay_order_id,
-                'razorpay_payment_id': razorpay_payment_id,
-                'razorpay_signature': razorpay_signature
-            })
-
-            # Update the order status
-            order = razorpay_client.order.fetch(razorpay_order_id)
-            order_status = order.get('status')
-
-            # Handle the order status based on your application logic
-            if order_status == 'created':
-                # Payment successful
-                return HttpResponse('Payment Successful')
-
-            elif order_status == 'paid':
-                # Payment successful, but the amount paid is less than the expected amount
-                return HttpResponse('Payment Successful (Partial Payment)')
-
-            elif order_status == 'pending':
-                # Payment pending
-                return HttpResponse('Payment Pending')
-
-            elif order_status == 'failed':
-                # Payment failed
-                return HttpResponse('Payment Failed')
-
-        except razorpay.errors.SignatureVerificationError as e:
-            # Invalid signature
-            return HttpResponse('Invalid Payment Signature')
-        
 
 

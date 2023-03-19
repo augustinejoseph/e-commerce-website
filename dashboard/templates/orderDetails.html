@@ -131,11 +131,6 @@
           <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
           <span>Team</span>
         </div>
-{% comment %} 
-        <div class="d-flex justify-content-between footer p-3">
-          <span>Need Help? visit our <a href="#"> help center</a></span>
-          <span>12 June, 2020</span>
-        </div> {% endcomment %}
       </div>
     </div>
   </div>
@@ -143,19 +138,3 @@
 
 {% endblock content %}
 
-
-
-
-{% comment %} {% extends "homebase_ecommerce.html" %}
-
-{% block content %}
-  <h1>Payment Successful</h1>
-  <p>Thank you for your payment.</p>
-  <form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="razorpay_payment_id" value="{{ razorpay_payment_id }}">
-    <input type="hidden" name="razorpay_order_id" value="{{ razorpay_order_id }}">
-    <input type="hidden" name="razorpay_signature" value="{{ razorpay_signature }}">
-    <button type="submit">Complete Order</button>
-  </form>
-{% endblock %} {% endcomment %}

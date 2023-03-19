@@ -5,7 +5,7 @@ function startPayment(amount) {
       "amount": amount,
       "currency": "INR",
       "name": "See and wear Footwears",
-      "description": "Thank you for purchasing with See and Wear. See you Soon",
+      "description": "Thank you for purchasing with Happy Feetz. See you Soon",
       "image": "your_logo_url",
       "handler": function (response){
         // Handle the payment response

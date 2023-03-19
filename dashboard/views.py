@@ -67,35 +67,6 @@ def edit(request):
     return render(request,'editProfile.html', context)
 
 
-# def edit(request):
-#     useraddress = Address.objects.all().filter(user=request.user).first()
-#     if request.method == 'POST':
-#         user_form = UserForm(request.POST, instance=request.user)
-#         address_form = UserAddressForm(request.POST, instance=useraddress)
-#         if user_form.is_valid() and address_form.is_valid():
-#             user_form.save()
-#             address_form.save()
-#             messages.success(request, 'Your profile has been updated!')
-#             return redirect('edit_profile')
-#         # else:
-#         #     context={'error':user_form.errors,
-
-#         #             'error2':address_form.errors
-            
-#         #     }
-#         #     return render(request, 'profile.html', context)
-#     else:
-#          user_form = UserForm(instance=request.user)
-#          address_form = UserAddressForm(instance=useraddress)
-#          context = {
-#                 'user_form': user_form,
-#                 'address_form': address_form
-#             }
-#         #  full_name = str(user.first_name) + str(user.last_name)   
-#     return render(request, 'customers/edit_profile.html', context)
-
-
-
 @login_required
 def orders(request):
     orders = Order.objects.filter(user = request.user, isOrdered=True).order_by('-dateCreated')
@@ -166,39 +137,4 @@ def returnProduct(request, order_id):
     else:
         messages.error(request, 'Unable to return, Contact Admin for more details')
         return redirect('orders')
-
-
-
-# =================================================CBV=========================================================================
-# from django.shortcuts import render
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.views.generic.detail import DetailView
-# from django.views.generic.edit import UpdateView
-# from django.urls import reverse_lazy
-
-# from accounts.models import Account
-
-# class UserProfileView(LoginRequiredMixin, DetailView):
-#     model = Account
-#     template_name = 'dashboard.html'
-
-
-#     def get_object(self):
-#         return self.request.user.account
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['user'] = self.request.email
-#         return context
-    
-
-# class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
-#     model               = Account
-#     fields              = ['first_name', 'last_name', 'email']
-#     template_name       = 'edit.html'
-#     success_url         = 'dashboard'
-
-#     def get_object(self):
-#         return self.request.Account
-
 
