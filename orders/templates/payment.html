@@ -118,6 +118,7 @@
 						<dl class="dlist-align">
 							<dt>Grand Total:</dt>
 							<dd class="text-right text-dark b"><strong>Rs. {{grandTotal|floatformat:2}}</strong></dd>
+
 						</dl>
 						<hr>
 						<p class="text-center mb-3">
@@ -125,23 +126,22 @@
 						</p>
 
 
-						<div id="paypal-button-container">
-							<!-- PayPal Button Will Load -->
-						</div>
+					<form action="{% url 'razorpay_payment' %}" method="POST">
+						{% csrf_token %}
 						<div class="btn btn-block btn-sm btn-primary">
                         
-
-							<button id="rzp-button1" class=" payWithRazorpay btn btn-primary btn-block p-1 m-0">Pay With RazorPay</a> </button>
+							<button id="rzp-button1" class=" payWithRazorpay btn btn-primary btn-block p-1 m-0">Pay With RazorPay Bottom</a> </button>
 						</div class="pt-5" >
 						<div class="pt-2">
-							{% comment %} <a href="{% url 'orderSuccess' %}"><h5>Cash on Delivery</h5></a> {% endcomment %}
-							<button class="btn btn-primary btn-block p-1 m-0"><a href="{% url 'orderCompleted' %}"><h5 class="btn btn-primary btn-block p-1 m-0">Cash on Delivery</h5></a> </button>
+							<button type="button" class="razorpay-payment-button" rzp-button2>Cash on Delivery</button>
+
+							{% comment %} <button class="btn btn-primary btn-block p-1 m-0"><a href="{% url 'orderCompleted' %}"><h5 class="btn btn-primary btn-block p-1 m-0">Cash on Delivery</h5></a> </button> {% endcomment %}
 							
 						</div>
-
-					</div> <!-- card-body.// -->
+					</form>
+					</div>
+					{{razorpayTotal}} <!-- card-body.// -->
 				</div> <!-- card.// -->
-
 			</aside> <!-- col.// -->
 
 
@@ -154,14 +154,45 @@
 </section>
 
 
+<script>
+var options = {
+    "key": "{{RAZOR_KEY_ID}}", // Enter the Key ID generated from the Dashboard
+    "amount": "{{total}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Happy Feets Footwears",
+    "description": "Thank you. Visit Again!",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+	"callback_url": "{% url 'payment_callback' %}",
+    "prefill": {
+        "name": "{{order.fullName}}",
+        "email": "{{order.email}}",
+        "contact": "{{order.phone}}"
+    },
+    "notes": {
+        "address": "Happy Feets Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+	console.log("Button clicked");
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
 
 
+
+{% comment %} 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
-    "key": "rzp_test_FznCc4xn53Y0R9",
+    "key": "{{RAZOR_KEY_ID}}",
     //"amount": "100", 
-    "amount": "{{razorpayTotal}}", 
+    "amount": "{{grandTotal}}", 
     "currency": "INR",
     "name": "HappyFeets Footwears",
     "description": "See you soon",
@@ -169,59 +200,9 @@ var options = {
     //"order_id": "{{order.orderNumber}}", 
 	//"order_id": "order_IlfeaGWxBm9U8zJ8",
 
-	"handler": function (responsea){
-		var paymentData = {
-			"payment_id": responsea.razorpay_payment_id,
-			//"order_id": responsea.razorpay_order_id,
-			//"signature": responsea.razorpay_signature
-		};
-
-		// Store the payment data in the session
-		console.log('paymentData   ' + paymentData[0]);
-		
-		sessionStorage.setItem('payment_data', JSON.stringify(paymentData));
-		sessionStorage.setItem('hello_test', JSON.stringify('hello World'));
-		sessionStorage.setItem('test_string', 'Hello, World!');
-		
-
-		// Retrieve the payment data from the session
-		var paymentDataString = sessionStorage.getItem('payment_data');
-		console.log('paymentDataString   ' +paymentDataString);
-
-
-
-
-		var paymentData = JSON.parse(paymentDataString);
-		console.log('paymentData  '+ paymentData);
-		swal({
-			title: "Payment successful!",
-			text: "Your payment has been processed.",
-			icon: "success",
-			button: "OK",
-		}).then(() =>{
-
-
-
-			// Render the order-completed template
-
-			$.ajax({
-				
-				//url: '/orders/order-completed-ajax/',
-				url: '{% url 'orderCompletedAjax' %}',
-				type: 'GET',
-				dataType: 'html',
-				success: function(response) {
-					$('body').html(response);
-				}
-				
-
-			});
-			console.log("ajax inside ");
-
-
-
-		});
-		
+	"handler": function (response){
+		console.log(response);
+		window.location.href = "/order_success/?payment_status=" + response.razorpay_payment_status + "&payment_id=" + response.razorpay_payment_id + "&order_id=" + response.razorpay_order_id;
 		
 	},
 
@@ -249,11 +230,12 @@ rzp1.on('payment.failed', function (response){
         //alert(response.error.metadata.order_id);
         //alert(response.error.metadata.payment_id);
 });
-document.getElementById('rzp-button1').onclick = function(e){
+document.getElementById('#rzp-button1').onclick = function(e){
+	console.log('button pressed rzrpy');
     rzp1.open();
     e.preventDefault();
 }
-</script>
+</script> {% endcomment %}
 
 {% endblock content %}
 

@@ -43,7 +43,7 @@
                     {% if order.status == "Delivered" %}
                     <td ><a href="{% url 'returnProduct' order.id%}" class="btn btn-secondary text-small">Return</a></td>
                     {% else %}
-                    <td></td>
+                    <td ><a href="{% url 'orderDetails' order.id%}" class="btn btn-secondary text-small">Details</a></td>
                     {% endif %}
                   </tr>
                   {% endfor %}

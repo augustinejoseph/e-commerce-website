@@ -82,7 +82,7 @@ class UserProfile(models.Model):
     address_line_two = models.CharField(max_length=100, blank=True)
     city = models.CharField(blank=True, max_length=50)
     state = models.CharField(blank=True, max_length=50)
-    country = models.CharField(blank=True, max_length=50)
+    country = models.CharField(blank=True, max_length=50, default='India')
 
     def __str__(self):
         return self.user.first_name

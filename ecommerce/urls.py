@@ -25,7 +25,7 @@ urlpatterns = [
     # path('', views.home, name='home'),
     path('accounts/',include('accounts.urls')),
     path('cart/', include('cart.urls')),
-    path('customAdmin/', include('customAdmin.urls')),
+    # path('customAdmin/', include('customAdmin.urls')),
     path('pages/', include('pages.urls')),
     path('dashboard/', include('dashboard.urls')),
     # path('category/<slug:categorySlug>/', views.home, name = 'productByCategory'),

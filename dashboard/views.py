@@ -7,12 +7,41 @@ from django.contrib import messages
 from accounts.models import Account,UserProfile,User
 from dashboard.models import Account
 from dashboard.forms import UserForm,UserProfile,UserProfileForm
-from orders.models import Order
+from orders.models import Order, OrderProduct
+from dashboard.forms import AddressForm
+from django.views.generic.edit import FormView
 
+# Shipping Addresses
+class Addaddress(FormView):
+    form_class = AddressForm
+    template_name = 'addAddress.html' 
+    success_url = '/dashboard/'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 @login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+@login_required
+def orderDetails(request, order_id):
+    order = Order.objects.get(id = order_id)
+    orderProduct = OrderProduct.objects.filter(order_id = order)
+    print('------------',order )
+    print('------------',orderProduct)
+    context= {
+        'order' : order,
+        'orderProduct' : orderProduct
+        }
+    return render(request, 'orderDetails.html', context)
+
+@login_required
+def cancelOrder(request, order_id):
+    order = Order.objects.get(id = order_id)
+    order.status = 'Cancelled'
+    order.save()
+    return redirect('orders')
 
 @login_required
 def edit(request):
@@ -98,16 +127,11 @@ def changePassword(request):
     return render(request, 'changePassword.html')
 
 
-
+# Users Address
 @login_required
 def address(request):
     userProfile = UserProfile.objects.get(user = request.user)
-
-
-    context={
-        'profile_form' : userProfile,
-        
-    }
+    context={'profile_form' : userProfile,}
     return render(request, 'address.html', context)
 
 def add_funds(request):
@@ -138,10 +162,10 @@ def returnProduct(request, order_id):
         user.wallet += order.orderTotal
         user.save()
         messages.success(request, 'Return Succcessful. Amound added to the wallet')
-        return redirect('dashboard')
+        return redirect('orders')
     else:
         messages.error(request, 'Unable to return, Contact Admin for more details')
-        return redirect('dashboard')
+        return redirect('orders')
 
 
 

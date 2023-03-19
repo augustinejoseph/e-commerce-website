@@ -257,6 +257,7 @@ class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'orderList.html'
     context_object_name = 'orders'
     paginate_by = 10
+    ordering = ['-dateCreated']
 
 # Order search functionality
 def OrderSearch(request):

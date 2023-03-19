@@ -9,7 +9,7 @@ class Wishlist(models.Model):
     wished_item = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True) # changed field name to snake_case
     created_at =  models.DateTimeField(auto_now_add=True)
 
-    def __srt__(self):
+    def __str__(self):
         return self.user
     
 

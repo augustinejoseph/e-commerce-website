@@ -1,4 +1,3 @@
-
 from decimal import Decimal
 from time import timezone
 from django.http import HttpResponse
@@ -31,7 +30,6 @@ from accounts.models import Address
 now = timezone.make_aware(datetime.now(), timezone.get_default_timezone())
 razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
-
 def get_address(request, address_id):
     try:
         address = Address.objects.get(id=address_id, account=request.user)
@@ -49,13 +47,11 @@ def get_address(request, address_id):
     except Address.DoesNotExist:
         return JsonResponse({"error": "Address not found"})
 
-
 def _cartId(request):
     cart = request.session.session_key
     if not cart:
         cart = request.session.create()
     return cart
-
 
 class CartView(TemplateView):
     
@@ -89,7 +85,6 @@ class CartView(TemplateView):
             
         }
         return render(request, 'cart.html', context)
-
 
 def addCart(request, productId):
     current_user = request.user
@@ -269,9 +264,6 @@ class CheckoutView(LoginRequiredMixin, View):
                 order_amount = int(grand_total*100)
                 order_currency = 'INR'
                 order_receipt = 'order_receipt'
-                # request.session['grand_total'] = grand_total
-                # request.session['discount_amount'] = discount_amount
-                # request.session['total_with_tax'] = total_with_tax
                 request.session.update({
                     'grand_total': grand_total,
                     'discount_amount': discount_amount,
@@ -368,6 +360,5 @@ def razorpay_success(request):
             # Invalid signature
             return HttpResponse('Invalid Payment Signature')
         
-def success(request):
-    return render(request, 'success.html')
+
 

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from dashboard.views import Addaddress
 
 urlpatterns = [
     path('', views.dashboard, name = 'dashboard'),
@@ -9,7 +10,10 @@ urlpatterns = [
     path('change_password/', views.changePassword, name='changePassword'),
     path('address/', views.address, name = 'address'),
     path('add-funds/', views.add_funds, name='add_funds'),
-    path('return-roduct/<int:order_id>/', views.returnProduct, name = "returnProduct"),
+    path('return-product/<int:order_id>/', views.returnProduct, name = "returnProduct"),
+    path('add-address/' , Addaddress.as_view(), name = 'addAddress'),
+    path('order-details/<int:order_id>/', views.orderDetails, name = 'orderDetails'),
+    path('cancel-order/<int:order_id>/', views.cancelOrder, name ='cancelOrder'),
 
 ]
 

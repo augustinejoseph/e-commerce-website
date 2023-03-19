@@ -19,11 +19,9 @@ class Payment(models.Model):
 status = (
     ('New' , 'New'),
     ('Delivered' , 'Delivered'),
-    ('Completed' , 'Completed'),
     ('Cancelled' , 'Cancelled'),
-    ('Pending', 'Pending'),
     ('Refunded', 'Refunded'),
-    ('Failed', 'Failed'),
+    
 
 )
 
@@ -55,10 +53,13 @@ class Order(models.Model):
         return f'{self.firstName} {self.lastName}'
     
     def fullAddress(self):
-        return f'{self.addressLineOne} {self.city}'
+        return f'{self.addressLineOne} {self.addressLineTwo} {self.city} {self.state} {self.country}'
     
+    # def __str__(self):
+    #     return self.firstName
+
     def __str__(self):
-        return self.firstName
+        return f'Order {self.id}'
 
 
 
