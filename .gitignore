@@ -174,5 +174,13 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/django
 ecommerce/.env
 db.sqlite3
-static/
+static/*
+!adminPanel/static/
+!ecommerce/static/
+!accounts/static/
+!pages/static/
+!dashboard/static/
+!cart/static/
+!wishlist/static/
+
 
