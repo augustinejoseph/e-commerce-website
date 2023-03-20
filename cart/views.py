@@ -193,6 +193,7 @@ def addCart(request, productId):
             cartItem.save()
         return redirect('cart')
 
+
 def removeCartItem(request, productId , cartItemId):
     product = get_object_or_404(Product, id=productId)
     if request.user.is_authenticated:
@@ -266,6 +267,7 @@ class CheckoutView(LoginRequiredMixin, View):
                     'grand_total': grand_total,
                     'discount_amount': discount_amount,
                     'total_with_tax': total_with_tax,
+                    'order_amount' : order_amount
                 })
             else:
                 grand_total = int(total_with_tax)
@@ -276,7 +278,7 @@ class CheckoutView(LoginRequiredMixin, View):
                 request.session['discount_amount'] = discount_amount
                 request.session['total_with_tax'] = total_with_tax
 
-                
+            print('------------------raz amound in paise', order_amount)
             
         except ObjectDoesNotExist:
             pass 

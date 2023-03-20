@@ -11,6 +11,7 @@ from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 from cart import utils
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 # Payment Callback
 @csrf_exempt
@@ -133,8 +134,6 @@ def payment(request):
             data.city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             print('-------------state',state)
-            #rajyam = form.cleaned_data['rajyam']
-            #print('-------------country',rajyam)
             data.isOrdered = True
             data.orderTotal = grandTotal
             data.tax = tax
@@ -261,4 +260,3 @@ def razorpay_payment(request):
         payment = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
         return render(request, 'payment.html', {'payment': payment})
     return redirect('cart')
-

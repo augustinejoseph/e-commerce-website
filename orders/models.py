@@ -34,7 +34,7 @@ class Order(models.Model):
     tax = models.FloatField(default='18')
     status = models.CharField(choices=status, default='New', max_length=50)
     isOrdered = models.BooleanField(default=False)
-
+    refund = models.CharField(max_length=100, blank=True, null=True, default=None)
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, default='email')

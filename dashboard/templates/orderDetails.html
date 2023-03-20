@@ -118,7 +118,7 @@
         {% elif order.status == 'Cancelled' %}
             <span>Order is cancelled</span>
         {% elif order.status == 'New' %}
-            <a href="{% url 'cancelOrder' order.id %}" class="btn btn-danger" type="button">Cancel Order</a>
+            <a href="{% url 'returnProduct' order.id %}" class="btn btn-danger" type="button">Cancel Order</a>
         {% else %}
             <span>Order is On the Way</span>
         {% endif %}
