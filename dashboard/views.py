@@ -197,7 +197,7 @@ def returnProduct(request, order_id):
         return redirect('dashboard')
 
     # Initiate refund on Razorpay
-    refund_amount = order.orderTotal# Convert to paise
+    refund_amount = order.orderTotal*100
     paymentMethod = order.payment.paymentMethod
     print('-------------paymentMethod ', paymentMethod)
     if paymentMethod == 'Razorpay':
