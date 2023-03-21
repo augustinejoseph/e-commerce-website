@@ -46,6 +46,7 @@ def payment_callback(request):
             print('----------------------inside order in callback from rzpay', order)
             order.payment = payment
             print('----------------------inside payment in callback from rzpay', payment)
+            order.isOrdered =True
             order.save()
 
         
