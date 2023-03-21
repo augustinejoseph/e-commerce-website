@@ -74,7 +74,8 @@ def payment_callback(request):
                 product.stock -= item.quantity
                 product.save()
 
-            order = Order.objects.get(orderNumber=order_number)
+            order = Order.objects.get(user=request.user, orderNumber = order_number)
+            order.isOrdered = True
             ordered_products = OrderProduct.objects.filter(order_id=order.id)
             total = utils.total(ordered_products)
             tax = utils.tax(total)
@@ -114,7 +115,7 @@ def payment(request):
     discount_amount = request.session.get('discount_amount', None)
     total_with_tax = request.session.get('total_with_tax', None)
     total_without_tax = total_with_tax-tax
-    razorpayTotal = int(grandTotal*100)
+    razorpayAmount = (grandTotal*100)
     RAZOR_KEY_ID = ecommerce.settings.RAZOR_KEY_ID
     print(RAZOR_KEY_ID, 'razorpay-key-id')
 
@@ -132,9 +133,8 @@ def payment(request):
             data.addressLineOne = form.cleaned_data['addressLineOne']
             data.addressLineTwo = form.cleaned_data['addressLineOne']
             data.city = form.cleaned_data['city']
-            state = form.cleaned_data['state']
-            print('-------------state',state)
-            data.isOrdered = True
+            data.state = form.cleaned_data['state']
+            data.isOrdered = False
             data.orderTotal = grandTotal
             data.tax = tax
             data.save()
@@ -155,7 +155,7 @@ def payment(request):
 
             order = Order.objects.get(user=request.user, orderNumber = orderNumber)
             client = razorpay.Client(auth=(ecommerce.settings.RAZOR_KEY_ID, ecommerce.settings.RAZOR_KEY_SECRET))
-            payment = client.order.create({'amount':grandTotal , 'currency': 'INR', 'payment_capture': '1'})
+            payment = client.order.create({'amount':razorpayAmount , 'currency': 'INR', 'payment_capture': '1'})
             order_id = payment['id']
             
             context = {
@@ -164,7 +164,7 @@ def payment(request):
                 'total': total,
                 'discount_amount': discount_amount,
                 'grandTotal': grandTotal,
-                'razorpayTotal' : razorpayTotal,
+                'razorpayAmount' : razorpayAmount,
                 'orderNumber' : orderNumber,
                 'total_with_tax' : total_with_tax,
                 'total_without_tax' : total_without_tax,
@@ -178,6 +178,7 @@ def payment(request):
             print(cartItems)
             print(RAZOR_KEY_ID, '-razoor-key-id')
             print(order_id, '-razoor-order_id-')
+            print('------------------raz amound in paise', razorpayAmount)
 
             
             return render(request, 'payment.html', context)
@@ -205,6 +206,7 @@ def cod(request):
     print('----------------------inside order in callback from rzpay', order)
     order.payment = payment
     print('----------------------inside payment in callback from rzpay', payment)
+    order.isOrdered =True
     order.save()
 
 
@@ -255,7 +257,8 @@ def cod(request):
 def razorpay_payment(request):
     grandTotal = request.session.get('grand_total', None)
     if request.method == 'POST':
-        amount = grandTotal
+        amount = grandTotal*100
+        print('-------------------------amound passed in order creation',amount)
         client = razorpay.Client(auth=(ecommerce.settings.RAZOR_KEY_ID, ecommerce.settings.RAZOR_KEY_SECRET))
         payment = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
         return render(request, 'payment.html', {'payment': payment})

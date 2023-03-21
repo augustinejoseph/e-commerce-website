@@ -40,11 +40,11 @@
                     <td>Rs {{ order.orderTotal }}</td>
                     <td>{{ order.dateCreated|truncatechars:10 }} </td>
                     <td>{{ order.status }}</td>
-                    {% if order.status == "Delivered" %}
-                    <td ><a href="{% url 'returnProduct' order.id%}" class="btn btn-secondary text-small">Return</a></td>
-                    {% else %}
+                    
+                    
+                   
                     <td ><a href="{% url 'orderDetails' order.id%}" class="btn btn-secondary text-small">Details</a></td>
-                    {% endif %}
+                    
                   </tr>
                   {% endfor %}
                 </tbody>

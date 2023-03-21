@@ -263,12 +263,12 @@ class CheckoutView(LoginRequiredMixin, View):
                 order_amount = int(grand_total*100)
                 order_currency = 'INR'
                 order_receipt = 'order_receipt'
-                request.session.update({
-                    'grand_total': grand_total,
-                    'discount_amount': discount_amount,
-                    'total_with_tax': total_with_tax,
-                    'order_amount' : order_amount
-                })
+                # request.session.update({
+                #     'grand_total': grand_total,
+                #     'discount_amount': discount_amount,
+                #     'total_with_tax': total_with_tax,
+                #     'order_amount' : order_amount
+                # })
             else:
                 grand_total = int(total_with_tax)
                 order_amount = int(grand_total*100)
@@ -279,6 +279,7 @@ class CheckoutView(LoginRequiredMixin, View):
                 request.session['total_with_tax'] = total_with_tax
 
             print('------------------raz amound in paise', order_amount)
+            print('------------------normal amound ', grand_total)
             
         except ObjectDoesNotExist:
             pass 

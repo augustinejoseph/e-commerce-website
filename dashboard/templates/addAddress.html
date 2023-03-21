@@ -1,5 +1,5 @@
 {% extends 'homebase_ecommerce.html' %}
-{% load 'crispy_form_tags' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
@@ -12,6 +12,8 @@
             {% include 'include/dashboardSidebar.html' %}
         <main class="col-md-9">
             <article class="card">
+                <form action="" method="POST">
+                    {% csrf_token %}
             <header class="card-header">
                 <strong class="d-inline-block mr-3">Add Address</strong>
             </header>
@@ -51,7 +53,9 @@
 
                 
                 {{form | crispy}}
+                <button class="btn btn-primary btn-sm" type ="submit"> Save </button>
             </div> <!-- card-body .// --> 
+                </form>
             </article> <!-- order-group.// --> 
         </main>
     </div> <!-- row.// -->
