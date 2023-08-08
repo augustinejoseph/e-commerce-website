@@ -228,8 +228,8 @@ if DEBUG == True:
     MEDIA_ROOT = BASE_DIR/'media/'
 else:
     MEDIA_URL = '/media/'
-    # MEDIA_ROOT = '/home/ubuntu/happyfeets/media'
-    BASE_DIR/'media/'
+    MEDIA_ROOT = '/home/developer_augustine/happyfeets/media'
+    # BASE_DIR/'media/'
 
 
 RAZOR_KEY_ID = env('RAZOR_KEY_ID')
