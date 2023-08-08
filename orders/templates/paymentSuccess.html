@@ -53,7 +53,7 @@
                 <thead class="bg text-dark">
                   <tr>
                     <th class="align-middle p-0 m-0">Products</th>
-                    
+                    <th class="align-middle p-0 m-0">Variation</th>
                     <th class="align-middle p-0 m-0">Price</th>
                     <th class="align-middle p-0 m-0">Quantity</th>
                    
@@ -61,19 +61,26 @@
                   </tr>
                 </thead>
                 <tbody class="align-middle">
-                  {% for cartItem in cartItems %}
+                  {% for item in ordered_products %}
                   <tr>
-                    <td class="align-middle p-2 m-2"><img src="{{ cartItem.product.images.url }}" alt="" style="width: 60px;"> 
+                    <td class="align-middle p-2 m-2"><img src="{{ item.product.images.url }}" alt="" style="width: 60px;"> 
                       <div class="row">
-                        <h6>{{ cartItem.product.productName |truncatechars:25 }}</h6>
+                        <h6>{{ item.product.productName |truncatechars:25 }}</h6>
                       </div>
                     </td>
-                    
-                    <td class="align-middle">Rs. {{ cartItem.product.price |floatformat:2}}</td>
+                    <td>
+                      {% if item.variations.all %}
+                          {% for i in item.variations.all %}
+                              {{ i.variationValue | capfirst }} <br>
+                          {% endfor %}
+                        {% endif %}
+                    </td>
+                    {% comment %} <td class="align-middle">{{item.variations.variationValue}}</td> {% endcomment %}
+                    <td class="align-middle">Rs. {{ item.product.price |floatformat:2}}</td>
                     
                     <td class="align-middle text-muted small">
                       
-                      <h6>{{ cartItem.quantity }}</h6>
+                      <h6>{{ item.quantity }}</h6>
                         
                       
                     </td>

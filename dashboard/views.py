@@ -1,4 +1,3 @@
-
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -125,60 +124,6 @@ def add_funds(request):
         except ValueError as e:
             messages.error(request, str(e))
 
-# #Old one with wallet
-# def returnProduct(request, order_id):
-#     user = Account.objects.get(id = request.user.id)
-#     order = Order.objects.get(id = order_id)
-#     if order.status == 'Delivered':
-#         order.status = "Refunded"
-#         order.save()
-#         user.wallet += order.orderTotal
-#         user.save()
-#         messages.success(request, 'Return Succcessful. Amound added to the wallet')
-#         return redirect('orders')
-#     else:
-#         messages.error(request, 'Unable to return, Contact Admin for more details')
-#         return redirect('orders')
-
-
-# client = razorpay.Client(auth=(ecommerce.settings.RAZOR_KEY_ID, ecommerce.settings.RAZOR_KEY_SECRET))
-# @login_required
-# def returnProduct(request, order_id):
-#     # Fetch order details from database
-#     order = Order.objects.get(id=order_id)
-
-#     # Check if the order belongs to the logged-in user
-#     if order.user != request.user:
-#         messages.error(request, 'You are not authorized to access this order.')
-#         return redirect('dashboard')
-
-#     # Check if the order has already been refunded
-#     if order.status == 'Refunded':
-#         messages.error(request, 'This order has already been refunded.')
-#         return redirect('dashboard')
-
-#     # Initiate refund on Razorpay
-#     refund_amount = order.orderTotal* 100 # Convert to paise
-#     try:
-#         refund_data = {
-#             "payment_id": order.payment_id,
-#             "amount": refund_amount,
-#             "speedy_complete": True
-#         }
-#         refund = client.payment.refund.create(**refund_data)
-
-#         # Update order details in database
-#         order.status = 'Refunded'
-#         print('------------order status after refund', order.status)
-#         order.refund_id = refund['id']
-#         print('------------ refund id after refund', order.refund)
-#         order.save()
-
-#         messages.success(request, 'Refund initiated successfully.')
-#     except Exception as e:
-#         messages.error(request, 'Failed to initiate refund: ' + str(e))
-
-#     return redirect('dashboard')
 
 client = razorpay.Client(auth=(ecommerce.settings.RAZOR_KEY_ID, ecommerce.settings.RAZOR_KEY_SECRET))
 @login_required

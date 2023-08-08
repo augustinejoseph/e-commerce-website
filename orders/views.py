@@ -85,7 +85,7 @@ def payment_callback(request):
             context = {
                 'order_number': order_number,
                 'order': order,
-                'cartItems': ordered_products,
+                'ordered_products': ordered_products,
                 'grandTotal' : grandTotal,
                 'order' : order,
                 }
@@ -97,7 +97,6 @@ def payment_callback(request):
     else:
         # Return an HTTP response with a bad request status code
         return HttpResponse(status=400)
-
 
 #sample comment
 @login_required(login_url='login')
@@ -239,13 +238,17 @@ def cod(request):
     order = Order.objects.get(orderNumber=order_number)
     ordered_products = OrderProduct.objects.filter(order_id=order.id)
     total = utils.total(ordered_products)
+    print('-------------ordered products', ordered_products)
+    # print('-----osrderd variation', ordered_products.variations)
+    # for variation in ordered_products.variations.all():
+    #     print('varistion===============================',variation)
     tax = utils.tax(total)
     grandTotal = total + tax
 
     context = {
         'order_number': order_number,
         'order': order,
-        'cartItems': ordered_products,
+        'ordered_products': ordered_products,
         'grandTotal' : grandTotal,
         'order' : order,
         }

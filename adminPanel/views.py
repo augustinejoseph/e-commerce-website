@@ -29,6 +29,7 @@ from django.db.models.functions import TruncDay
 
 from django.contrib.auth import login
 
+
 def adminLogin(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -258,6 +259,7 @@ class OrderListView(LoginRequiredMixin, ListView):
     context_object_name = 'orders'
     paginate_by = 10
     ordering = ['-dateCreated']
+    
 
 # Order search functionality
 def OrderSearch(request):
@@ -283,9 +285,22 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
 # View Order
 class OrderDetailView(LoginRequiredMixin, DetailView):
     login_url =reverse_lazy('adminLogin')
-    context_object_name = 'order'
+    #context_object_name = 'order'
     model = Order
     template_name = 'orderDetail.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        print('-------------------pk',pk)
+        order = Order.objects.get(pk=pk)
+        print('----------first---context', context)
+        print('==========order nu', order)
+        # context['order_product'] = OrderProduct.objects.all()
+        context['order_product'] = OrderProduct.objects.filter(order=order)
+        print('context----------------------', context)
+        return context
 
 def deleteOrder(request, pk):
     order = Order.objects.get(id = pk)

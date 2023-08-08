@@ -4,7 +4,7 @@
 <div class="col-lg-9 grid-margin stretch-card p-2 form-input">
     <div class="card">
       <div class="card-body ">
-              <div class="row">
+              {% comment %} <div class="row">
                 <div class="col-sm-3 pt-2">
                   <p class="mb-0">Order NUmber</p>
                 </div>
@@ -92,12 +92,163 @@
                 <div class="col-sm-3 pt-2">
                   <a href="{% url 'order_list' %}" class=" btn btn-primary mb-0">Back</a>
                 </div>
+              </div> {% endcomment %}
+
+
+              <div class="invoice p-5">
+                <h5>Order Details</h5>
+      
+                <span class="font-weight-bold d-block mt-4">Hello, {{order.fullName}}</span>
+                <span
+                  ></span>
+      
+                <div
+                  class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                  <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                       
+                        <td>
+                          <div class="py-2">
+                            <span class="d-block text-muted">Order No</span>
+                            <span>{{order.orderNumber}}</span>
+                          </div>
+                        </td>
+      
+                        <td>
+                          <div class="py-2">
+                            <span class="d-block text-muted">Total Cost</span>
+                            <span>{{order.orderTotal}}</span>
+                          </div>
+                        </td> 
+      
+                        <td>
+                          <div class="py-2">
+                            <span class="d-block text-muted">Shiping Address</span>
+                            <span>{{order.fullAddress}}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="py-2">
+                            <span class="d-block text-muted">Status</span>
+                            <span>{{order.status}}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="card text-center">
+                  <h5 class="card-header"> <strong> Ordered Products </strong></h5>
+                  
+                  <div class="col-lg-12 table-responsive m-0 p-0" >
+                    <table class="table table-bordered text-center mb-0">
+                      <thead class="bg text-dark">
+                        <tr>
+                          <th class="align-middle p-0 m-0">Products</th>
+                          <th class="align-middle p-0 m-0">Variation</th>
+                          <th class="align-middle p-0 m-0">Price</th>
+                          <th class="align-middle p-0 m-0">Quantity</th>
+                          
+                         
+                          
+                        </tr>
+                      </thead>
+                      <tbody class="align-middle">
+                        {% for item in order_product %}
+                        <tr>
+                          <td class="align-middle p-2 m-2"><img src="{{ item.product.images.url }}" alt="" style="width: 60px;"> 
+                            <div class="row">
+                              <h6>{{ item.product.productName |truncatechars:25 }}</h6>
+                            </div>
+                          </td>
+                          <td >
+                            {% if item.variations.all %}
+                                {% for i in item.variations.all %}
+                                    {{ i.variationValue | capfirst }} <br>
+                                {% endfor %}
+                              {% endif %}
+                          </td>
+                          <td class="align-middle">Rs. {{ item.product.price |floatformat:2}}</td>
+                          
+                          <td class="align-middle text-muted small">
+                            
+                            <h6>{{ item.quantity }}</h6>
+                              
+                            
+                          </td>
+                          
+                          
+                          
+                          
+                          
+                           {% comment %} <p class="text-muted small">
+                            {% if item.variations.all %}
+                              {% for item in item.variation.all %}
+                                {{ item.variationCategory | capfirst }} : {{ item.variationValue | capfirst }} <br>
+                              {% endfor %}
+                            {% endif %}
+                          </p> 
+                                     {% endcomment %}
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+      
+      
+      
+                <div class="d-grid gap-2 d-md-block py-4 align-center">
+                  {% if order.status == 'Refunded' %}
+                  <span>Order is already returned</span>
+              {% elif order.status == 'Delivered' %}
+                  {% if request.GET.returned == 'true' %}
+                      <span>Order is returned</span>
+                  {% else %}
+                      <a href="{% url 'returnProduct' order.id %}?returned=true" class="btn btn-primary" type="button">Return Order</a>
+                  {% endif %}
+              {% elif order.status == 'Cancelled' %}
+                  <span>Order is cancelled</span>
+              {% elif order.status == 'New' %}
+                  <a href="{% url 'returnProduct' order.id %}" class="btn btn-danger" type="button">Cancel Order</a>
+              {% else %}
+                  <span>Order is On the Way</span>
+              {% endif %}
+              
+                  {% comment %} <a href="{% url 'orders' %}" class="btn btn-primary" type="button">View Orders</a> {% endcomment %}
+                </div>
+      
+                <p>
+                </p>
+                <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+                <span>Team</span>
               </div>
+            </div>
+          </div>
+
+
             </div>
           </div>
           
         </div>
     </div>
     </div> 
+
+
+
+
+    {% comment %}  {% endcomment %}
+
+<div class="container mt-5 mb-5">
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        
+
+  </div>
+</div>
 
 {% endblock content %}
