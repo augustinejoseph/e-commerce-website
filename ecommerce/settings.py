@@ -111,7 +111,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if DEBUG == False:
+if DEBUG == True:
 
     DATABASES = {
         'default': {
@@ -228,7 +228,8 @@ if DEBUG == True:
     MEDIA_ROOT = BASE_DIR/'media/'
 else:
     MEDIA_URL = '/media/'
-    MEDIA_ROOT = '/home/ubuntu/happyfeets/media'
+    # MEDIA_ROOT = '/home/ubuntu/happyfeets/media'
+    BASE_DIR/'media/'
 
 
 RAZOR_KEY_ID = env('RAZOR_KEY_ID')
