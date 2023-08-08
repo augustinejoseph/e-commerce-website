@@ -111,7 +111,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if DEBUG == True:
+if DEBUG == False:
 
     DATABASES = {
         'default': {
