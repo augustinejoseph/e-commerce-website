@@ -236,3 +236,6 @@ RAZOR_KEY_ID = env('RAZOR_KEY_ID')
 RAZOR_KEY_SECRET = env('RAZOR_KEY_SECRET') 
 
 
+ADMINS = [
+    ('Augustine', env('EMAIL_HOST_USER')),
+]

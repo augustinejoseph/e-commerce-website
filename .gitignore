@@ -182,5 +182,4 @@ static/*
 !dashboard/static/
 !cart/static/
 !wishlist/static/
-
-
+venv
