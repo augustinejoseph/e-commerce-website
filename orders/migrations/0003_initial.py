@@ -6,57 +6,131 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('products', '0006_alter_product_brand_alter_variations_product'),
-        ('orders', '0002_delete_payment'),
+        ("products", "0006_alter_product_brand_alter_variations_product"),
+        ("orders", "0002_delete_payment"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('orderNumber', models.CharField(max_length=30)),
-                ('dateCreated', models.DateTimeField(auto_now_add=True)),
-                ('orderTotal', models.FloatField()),
-                ('status', models.CharField(choices=[('New', 'New'), ('Completed', 'Completed'), ('Cancelled', 'Cancelled')], default='New', max_length=50)),
-                ('isOrdered', models.BooleanField(default=False)),
-                ('firstName', models.CharField(max_length=100)),
-                ('lastName', models.CharField(max_length=100)),
-                ('addressLineOne', models.CharField(max_length=100)),
-                ('city', models.CharField(max_length=100)),
-                ('state', models.CharField(max_length=100)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("orderNumber", models.CharField(max_length=30)),
+                ("dateCreated", models.DateTimeField(auto_now_add=True)),
+                ("orderTotal", models.FloatField()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("New", "New"),
+                            ("Completed", "Completed"),
+                            ("Cancelled", "Cancelled"),
+                        ],
+                        default="New",
+                        max_length=50,
+                    ),
+                ),
+                ("isOrdered", models.BooleanField(default=False)),
+                ("firstName", models.CharField(max_length=100)),
+                ("lastName", models.CharField(max_length=100)),
+                ("addressLineOne", models.CharField(max_length=100)),
+                ("city", models.CharField(max_length=100)),
+                ("state", models.CharField(max_length=100)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Payment',
+            name="Payment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('paymentId', models.CharField(max_length=100)),
-                ('amountPaid', models.CharField(max_length=100)),
-                ('status', models.CharField(max_length=100)),
-                ('createdAt', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("paymentId", models.CharField(max_length=100)),
+                ("amountPaid", models.CharField(max_length=100)),
+                ("status", models.CharField(max_length=100)),
+                ("createdAt", models.DateTimeField(auto_now_add=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='OrderProduct',
+            name="OrderProduct",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.IntegerField()),
-                ('productPrice', models.FloatField()),
-                ('ordered', models.BooleanField(default=False)),
-                ('createdAt', models.DateTimeField(auto_now_add=True)),
-                ('Payment', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.payment')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('variations', models.ManyToManyField(blank=True, to='products.variations')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("quantity", models.IntegerField()),
+                ("productPrice", models.FloatField()),
+                ("ordered", models.BooleanField(default=False)),
+                ("createdAt", models.DateTimeField(auto_now_add=True)),
+                (
+                    "Payment",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="orders.payment",
+                    ),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="orders.order"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.product",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "variations",
+                    models.ManyToManyField(blank=True, to="products.variations"),
+                ),
             ],
         ),
     ]

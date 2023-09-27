@@ -5,15 +5,19 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('orders', '0013_payment_paymentmethod'),
+        ("orders", "0013_payment_paymentmethod"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='orderproduct',
-            name='order',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='orders.order'),
+            model_name="orderproduct",
+            name="order",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="orders.order",
+            ),
         ),
     ]

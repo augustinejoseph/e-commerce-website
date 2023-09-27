@@ -6,16 +6,12 @@ from django.db.models import Sum
 
 
 def countData(request):
-    totalPrice= Order.objects.aggregate(Sum('orderTotal'))['orderTotal__sum']
+    totalPrice = Order.objects.aggregate(Sum("orderTotal"))["orderTotal__sum"]
     print(totalPrice)
     return {
-        'userCount' : Account.objects.count(),
-        'productCount' : Product.objects.count(),
-        'categoryCount' : Category.objects.count(),
-        'orderCount' : Order.objects.count(),
-        'totalPrice': totalPrice
-
+        "userCount": Account.objects.count(),
+        "productCount": Product.objects.count(),
+        "categoryCount": Category.objects.count(),
+        "orderCount": Order.objects.count(),
+        "totalPrice": totalPrice,
     }
-
-
-

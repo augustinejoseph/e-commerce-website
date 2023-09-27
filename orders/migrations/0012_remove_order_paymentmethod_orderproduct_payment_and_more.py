@@ -5,40 +5,49 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('products', '0008_alter_productgallery_options'),
-        ('orders', '0011_remove_orderproduct_payment_and_more'),
+        ("products", "0008_alter_productgallery_options"),
+        ("orders", "0011_remove_orderproduct_payment_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='paymentMethod',
+            model_name="order",
+            name="paymentMethod",
         ),
         migrations.AddField(
-            model_name='orderproduct',
-            name='Payment',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.payment'),
+            model_name="orderproduct",
+            name="Payment",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="orders.payment",
+            ),
         ),
         migrations.AddField(
-            model_name='orderproduct',
-            name='product',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='products.product'),
+            model_name="orderproduct",
+            name="product",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.product",
+            ),
         ),
         migrations.AddField(
-            model_name='orderproduct',
-            name='productPrice',
+            model_name="orderproduct",
+            name="productPrice",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='orderproduct',
-            name='quantity',
+            model_name="orderproduct",
+            name="quantity",
             field=models.IntegerField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='orderproduct',
-            name='variations',
-            field=models.ManyToManyField(blank=True, to='products.variations'),
+            model_name="orderproduct",
+            name="variations",
+            field=models.ManyToManyField(blank=True, to="products.variations"),
         ),
     ]

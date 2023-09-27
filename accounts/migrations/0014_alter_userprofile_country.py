@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0013_account_wallet'),
+        ("accounts", "0013_account_wallet"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userprofile',
-            name='country',
-            field=models.CharField(blank=True, default='India', max_length=50),
+            model_name="userprofile",
+            name="country",
+            field=models.CharField(blank=True, default="India", max_length=50),
         ),
     ]

@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0012_address_account_address_addresslineone_and_more'),
+        ("accounts", "0012_address_account_address_addresslineone_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='account',
-            name='wallet',
+            model_name="account",
+            name="wallet",
             field=models.IntegerField(default=0),
         ),
     ]

@@ -6,23 +6,37 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0003_alter_account_is_active'),
+        ("accounts", "0003_alter_account_is_active"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserProfile',
+            name="UserProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('profile_picture', models.ImageField(upload_to='userProfile/')),
-                ('address_line_one', models.CharField(blank=True, max_length=100)),
-                ('address_line_two', models.CharField(blank=True, max_length=100)),
-                ('city', models.CharField(blank=True, max_length=50)),
-                ('state', models.CharField(blank=True, max_length=50)),
-                ('country', models.CharField(blank=True, max_length=50)),
-                ('user', models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("profile_picture", models.ImageField(upload_to="userProfile/")),
+                ("address_line_one", models.CharField(blank=True, max_length=100)),
+                ("address_line_two", models.CharField(blank=True, max_length=100)),
+                ("city", models.CharField(blank=True, max_length=50)),
+                ("state", models.CharField(blank=True, max_length=50)),
+                ("country", models.CharField(blank=True, max_length=50)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

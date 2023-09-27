@@ -5,16 +5,19 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('products', '0006_alter_product_brand_alter_variations_product'),
-        ('wishlist', '0001_initial'),
+        ("products", "0006_alter_product_brand_alter_variations_product"),
+        ("wishlist", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='wishlist',
-            name='products',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='products.product'),
+            model_name="wishlist",
+            name="products",
+            field=models.ForeignKey(
+                blank=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.product",
+            ),
         ),
     ]

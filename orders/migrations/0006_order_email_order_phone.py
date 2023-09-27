@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('orders', '0005_order_createdat_order_modifiedat'),
+        ("orders", "0005_order_createdat_order_modifiedat"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='email',
-            field=models.EmailField(default='email', max_length=100),
+            model_name="order",
+            name="email",
+            field=models.EmailField(default="email", max_length=100),
         ),
         migrations.AddField(
-            model_name='order',
-            name='phone',
-            field=models.CharField(default='phone', max_length=100),
+            model_name="order",
+            name="phone",
+            field=models.CharField(default="phone", max_length=100),
         ),
     ]

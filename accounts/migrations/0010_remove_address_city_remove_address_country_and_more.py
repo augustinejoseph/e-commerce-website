@@ -4,30 +4,29 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0009_rename_name_address_account'),
+        ("accounts", "0009_rename_name_address_account"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='address',
-            name='city',
+            model_name="address",
+            name="city",
         ),
         migrations.RemoveField(
-            model_name='address',
-            name='country',
+            model_name="address",
+            name="country",
         ),
         migrations.RemoveField(
-            model_name='address',
-            name='pincode',
+            model_name="address",
+            name="pincode",
         ),
         migrations.RemoveField(
-            model_name='address',
-            name='state',
+            model_name="address",
+            name="state",
         ),
         migrations.RemoveField(
-            model_name='address',
-            name='streetAddress',
+            model_name="address",
+            name="streetAddress",
         ),
     ]

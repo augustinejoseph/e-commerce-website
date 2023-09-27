@@ -6,65 +6,68 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0011_remove_address_account'),
+        ("accounts", "0011_remove_address_account"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='address',
-            name='account',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="address",
+            name="account",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='address',
-            name='addressLineOne',
+            model_name="address",
+            name="addressLineOne",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='addressLineTwo',
+            model_name="address",
+            name="addressLineTwo",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='city',
+            model_name="address",
+            name="city",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='country',
+            model_name="address",
+            name="country",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='email',
+            model_name="address",
+            name="email",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='firstName',
+            model_name="address",
+            name="firstName",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='lastName',
+            model_name="address",
+            name="lastName",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='orderNote',
+            model_name="address",
+            name="orderNote",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='phone',
+            model_name="address",
+            name="phone",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='address',
-            name='state',
+            model_name="address",
+            name="state",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
     ]

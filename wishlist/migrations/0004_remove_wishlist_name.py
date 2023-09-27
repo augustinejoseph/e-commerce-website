@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wishlist', '0003_rename_createdat_wishlist_created_at_and_more'),
+        ("wishlist", "0003_rename_createdat_wishlist_created_at_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='wishlist',
-            name='name',
+            model_name="wishlist",
+            name="name",
         ),
     ]

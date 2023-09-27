@@ -6,19 +6,20 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0005_address'),
+        ("accounts", "0005_address"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='address',
-            name='user',
+            model_name="address",
+            name="user",
         ),
         migrations.AlterField(
-            model_name='address',
-            name='name',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="address",
+            name="name",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

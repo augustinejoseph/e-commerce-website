@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('products', '0004_rename_variationname_variations_variationvalue'),
+        ("products", "0004_rename_variationname_variations_variationvalue"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='brand',
-            field=models.CharField(choices=[('adidas', 'Adidas')], max_length=100, null=True),
+            model_name="product",
+            name="brand",
+            field=models.CharField(
+                choices=[("adidas", "Adidas")], max_length=100, null=True
+            ),
         ),
     ]

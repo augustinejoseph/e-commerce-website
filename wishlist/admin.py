@@ -5,7 +5,7 @@ from .models import Wishlist
 
 
 class WishlistAdmin(admin.ModelAdmin):
-    list_display = ['user', 'wished_item']
+    list_display = ["user", "wished_item"]
 
 
 admin.site.register(Wishlist, WishlistAdmin)

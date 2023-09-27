@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cart', '0005_coupon'),
+        ("cart", "0005_coupon"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='coupon',
-            name='expiry',
+            model_name="coupon",
+            name="expiry",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]

@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('orders', '0007_order_addresslinetwo_order_country_order_ordernote_and_more'),
+        ("orders", "0007_order_addresslinetwo_order_country_order_ordernote_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='paymentMethod',
-            field=models.CharField(default='COD', max_length=100),
+            model_name="order",
+            name="paymentMethod",
+            field=models.CharField(default="COD", max_length=100),
         ),
     ]
